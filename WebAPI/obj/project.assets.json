@@ -852,11 +852,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\API\\WebAPI\\WebAPI\\HISWebAPI.csproj",
+      "projectUniqueName": "E:\\ViRAJ\\Viraj\\Repo\\Naturub-HIS\\HISWebAPI\\WebAPI\\HISWebAPI.csproj",
       "projectName": "HISWebAPI",
-      "projectPath": "E:\\API\\WebAPI\\WebAPI\\HISWebAPI.csproj",
+      "projectPath": "E:\\ViRAJ\\Viraj\\Repo\\Naturub-HIS\\HISWebAPI\\WebAPI\\HISWebAPI.csproj",
       "packagesPath": "C:\\Users\\viraj.lasitha\\.nuget\\packages\\",
-      "outputPath": "E:\\API\\WebAPI\\WebAPI\\obj\\",
+      "outputPath": "E:\\ViRAJ\\Viraj\\Repo\\Naturub-HIS\\HISWebAPI\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\viraj.lasitha\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -20,7 +20,7 @@ namespace HISWebAPI.DataAccess
             this._configuration = configuration;
         }
 
-        public DataTable GetDataSet(int DataSetID)
+        public DataTable GetDataSet(int DataSetID) 
         {
             objExecute = new Execute(_configuration);
             SqlParameter[] param = new SqlParameter[]
