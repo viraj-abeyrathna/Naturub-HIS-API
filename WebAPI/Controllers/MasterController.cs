@@ -39,5 +39,18 @@ namespace HISWebAPI.Controllers
         }
 
         #endregion
+
+        #region Component
+
+        [Route("GetComponent/{id}")]
+        [HttpGet]
+        public JsonResult GetComponent(int id)
+        {
+            objMasterDA = new MasterDA(_configuration);
+            DataTable dt = objMasterDA.GetComponent(id);
+            return new JsonResult(dt);
+        }
+
+        #endregion
     }
 }
