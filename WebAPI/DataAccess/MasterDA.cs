@@ -12,7 +12,7 @@ namespace HISWebAPI.DataAccess
 {
     public class MasterDA
     {
-        Execute objExecute; 
+        Execute objExecute;
         private readonly IConfiguration _configuration;
 
         public MasterDA(IConfiguration configuration)
@@ -20,7 +20,8 @@ namespace HISWebAPI.DataAccess
             this._configuration = configuration;
         }
 
-        public DataTable GetDataSet(int DataSetID) 
+        #region Data Set
+        public DataTable GetDataSet(int DataSetID)
         {
             objExecute = new Execute(_configuration);
             SqlParameter[] param = new SqlParameter[]
@@ -30,5 +31,20 @@ namespace HISWebAPI.DataAccess
             DataTable dt = (DataTable)objExecute.Executes("spGetDataSet", ReturnType.DataTable, param, CommandType.StoredProcedure);
             return dt;
         }
+
+        #endregion
+
+        #region Component
+        public DataTable GetComponent(int ComponentID)
+        {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+            {
+                Execute.AddParameter("@ComponentID",ComponentID)
+            };
+            DataTable dt = (DataTable)objExecute.Executes("spGetComponent", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            return dt;
+        }
+        #endregion
     }
 }
