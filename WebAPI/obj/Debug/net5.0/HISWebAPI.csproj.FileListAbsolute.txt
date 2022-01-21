@@ -60,7 +60,6 @@ E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Debug\net5.0\runtimes\win-x
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\HISWebAPI.csprojAssemblyReference.cache
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\HISWebAPI.GeneratedMSBuildEditorConfig.editorconfig
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\HISWebAPI.AssemblyInfoInputs.cache
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\HISWebAPI.AssemblyInfo.cs
@@ -76,3 +75,4 @@ E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\HISWebAPI.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\ref\HISWebAPI.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\HISWebAPI.pdb
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\HISWebAPI.genruntimeconfig.cache
+E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\obj\Debug\net5.0\HISWebAPI.csprojAssemblyReference.cache
