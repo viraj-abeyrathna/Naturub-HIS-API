@@ -52,5 +52,31 @@ namespace HISWebAPI.Controllers
         }
 
         #endregion
+
+        #region MainCategory
+
+        [Route("GetMainCategory")]
+        [HttpGet]
+        public JsonResult GetMainCategory()
+        {
+            objMasterDA = new MasterDA(_configuration);
+            DataTable dt = objMasterDA.GetMainCategory();
+            return new JsonResult(dt);
+        }
+
+        #endregion
+
+        #region SubCategory
+
+        [Route("GetSubCategory/{id}")]
+        [HttpGet]
+        public JsonResult SubCategory(int id)
+        {
+            objMasterDA = new MasterDA(_configuration);
+            DataTable dt = objMasterDA.SubCategory(id);
+            return new JsonResult(dt);
+        }
+
+        #endregion
     }
 }
