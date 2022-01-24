@@ -35,6 +35,12 @@ namespace HISWebAPI.DataAccess
         #endregion
 
         #region Computer
+        public DataTable GetComputerModels()
+        {
+            objExecute = new Execute(_configuration); 
+            DataTable dt = (DataTable)objExecute.Executes("spGetComputerModels", ReturnType.DataTable, CommandType.StoredProcedure);
+            return dt;
+        }
         #endregion
     }
 }

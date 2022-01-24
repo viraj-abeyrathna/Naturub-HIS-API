@@ -68,12 +68,12 @@ namespace HISWebAPI.Controllers
 
         #region SubCategory
 
-        [Route("GetSubCategory/{id}")]
+        [Route("GetSubCategory/{MainCategoryID}")]
         [HttpGet]
-        public JsonResult SubCategory(int id)
+        public JsonResult SubCategory(int MainCategoryID)
         {
             objMasterDA = new MasterDA(_configuration);
-            DataTable dt = objMasterDA.SubCategory(id);
+            DataTable dt = objMasterDA.SubCategory(MainCategoryID);
             return new JsonResult(dt);
         }
 

@@ -31,6 +31,14 @@ namespace HISWebAPI.Controllers
             DataTable dt = objInventoryDA.GetItemsByMainCategory(1, ItemID);
             return new JsonResult(dt);
         }
+
+        [Route("GetComputerModels")]
+        [HttpGet]
+        public JsonResult GetComputerModels() {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetComputerModels();
+            return new JsonResult(dt);
+        }
         #endregion
     }
 }
