@@ -23,6 +23,7 @@ namespace HISWebAPI.Controllers
         }
 
         #region Computer
+
         [Route("GetComputer/{ItemID}")]
         [HttpGet]
         public JsonResult GetComputer(int ItemID)
@@ -39,6 +40,42 @@ namespace HISWebAPI.Controllers
             DataTable dt = objInventoryDA.GetComputerModels();
             return new JsonResult(dt);
         }
+
+        [Route("GetOperatingSystem")]
+        [HttpGet]
+        public JsonResult GetOperatingSystem()
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetOperatingSystem();
+            return new JsonResult(dt);
+        }
+
+        [Route("GetVirusGuard")]
+        [HttpGet]
+        public JsonResult GetVirusGuard() {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetVirusGuard();
+            return new JsonResult(dt);
+        }
+
+        [Route("GetProcessor")]
+        [HttpGet]
+        public JsonResult GetProcessor()
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetProcessor();
+            return new JsonResult(dt);
+        }
+
+        [Route("GetRAM")]
+        [HttpGet]
+        public JsonResult GetRAM()
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetRAM();
+            return new JsonResult(dt);
+        }
+
         #endregion
     }
 }

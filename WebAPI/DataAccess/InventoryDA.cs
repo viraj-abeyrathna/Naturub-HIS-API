@@ -41,6 +41,33 @@ namespace HISWebAPI.DataAccess
             DataTable dt = (DataTable)objExecute.Executes("spGetComputerModels", ReturnType.DataTable, CommandType.StoredProcedure);
             return dt;
         }
+
+        public DataTable GetOperatingSystem()
+        {
+            objExecute = new Execute(_configuration);
+            DataTable dt = (DataTable)objExecute.Executes("spGetOperatingSystem", ReturnType.DataTable, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        public DataTable GetVirusGuard()
+        {
+            objExecute = new Execute(_configuration);
+            DataTable dt = (DataTable)objExecute.Executes("spGetVirusGuard", ReturnType.DataTable, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        public DataTable GetProcessor() {
+            objExecute = new Execute(_configuration);
+            DataTable dt = (DataTable)objExecute.Executes("spGetProcessor", ReturnType.DataTable, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        public DataTable GetRAM() {
+            objExecute = new Execute(_configuration);
+            DataTable dt = (DataTable)objExecute.Executes("spGetRAM", ReturnType.DataTable, CommandType.StoredProcedure);
+            return dt;
+        }
+
         #endregion
     }
 }

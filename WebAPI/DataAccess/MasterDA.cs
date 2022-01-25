@@ -44,6 +44,31 @@ namespace HISWebAPI.DataAccess
         }
         #endregion
 
+        #region Department
+
+        public DataTable GetDepartment() {
+            objExecute = new Execute(_configuration);
+            DataTable dt = (DataTable)objExecute.Executes("spGetDepartment", ReturnType.DataTable, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        #endregion
+
+        #region Section
+
+        public DataTable GetSection(int DepartmentID)
+        {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+             {
+                Execute.AddParameter("@DepartmentID",DepartmentID)
+             };
+            DataTable dt = (DataTable)objExecute.Executes("spGetSection", ReturnType.DataTable, param,CommandType.StoredProcedure);
+            return dt;
+        }
+
+        #endregion
+
         #region MainCategory
         public DataTable GetMainCategory()
         {

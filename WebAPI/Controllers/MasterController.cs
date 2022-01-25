@@ -53,6 +53,32 @@ namespace HISWebAPI.Controllers
 
         #endregion
 
+        #region Department
+
+        [Route("GetDepartment")]
+        [HttpGet]
+        public JsonResult GetDepartment()
+        {
+            objMasterDA = new MasterDA(_configuration);
+            DataTable dt = objMasterDA.GetDepartment();
+            return new JsonResult(dt);
+        }
+
+        #endregion
+
+        #region Section
+
+        [Route("GetSection/{DepartmentID}")]
+        [HttpGet]
+        public JsonResult GetSection(int DepartmentID)
+        {
+            objMasterDA = new MasterDA(_configuration);
+            DataTable dt = objMasterDA.GetSection(DepartmentID);
+            return new JsonResult(dt);
+        }
+
+        #endregion
+
         #region MainCategory
 
         [Route("GetMainCategory")]
