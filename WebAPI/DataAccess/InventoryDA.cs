@@ -1,5 +1,6 @@
 ﻿using HISWebAPI.Common;
 using HISWebAPI.Enum;
+using HISWebAPI.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,31 @@ namespace HISWebAPI.DataAccess
             objExecute = new Execute(_configuration);
             DataTable dt = (DataTable)objExecute.Executes("spGetRAM", ReturnType.DataTable, CommandType.StoredProcedure);
             return dt;
+        }
+
+        public DataRow SaveComputer(Computer obj) {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+           {
+                Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
+                Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
+                Execute.AddParameter("@FARCode",obj.FARCode),
+                Execute.AddParameter("@ComputerName",obj.ComputerName),
+                Execute.AddParameter("@IPAddress",obj.IPAddress),
+                Execute.AddParameter("@DepartmentID",obj.DepartmentID),
+                Execute.AddParameter("@SectionID",obj.SectionID),
+                Execute.AddParameter("@LoginUser",obj.LoginUser),
+                Execute.AddParameter("@User",obj.User),
+                Execute.AddParameter("@OperatingSystemID",obj.OperatingSystemID),
+                Execute.AddParameter("@VirusGuardID",obj.VirusGuardID),
+                Execute.AddParameter("@ProcessorID",obj.ProcessorID),
+                Execute.AddParameter("@RAMID",obj.RAMID),
+                Execute.AddParameter("@Capacity",obj.Capacity),
+                Execute.AddParameter("@ModelName",obj.ModelName),
+                Execute.AddParameter("@Remark",obj.Remark)
+           };
+            DataRow dr = (DataRow)objExecute.Executes("spSaveComputer", ReturnType.DataRow, param, CommandType.StoredProcedure);
+            return dr;
         }
 
         #endregion

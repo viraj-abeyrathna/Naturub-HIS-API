@@ -1,4 +1,5 @@
 ﻿using HISWebAPI.DataAccess;
+using HISWebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -74,6 +75,15 @@ namespace HISWebAPI.Controllers
             objInventoryDA = new InventoryDA(_configuration);
             DataTable dt = objInventoryDA.GetRAM();
             return new JsonResult(dt);
+        }
+
+        [Route("SaveComputer")]
+        [HttpPost]
+        public JsonResult SaveComputer(Computer obj)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataRow dr = objInventoryDA.SaveComputer(obj);
+            return new JsonResult(dr);
         }
 
         #endregion
