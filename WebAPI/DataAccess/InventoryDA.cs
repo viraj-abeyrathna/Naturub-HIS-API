@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace HISWebAPI.DataAccess
 {
@@ -22,76 +24,80 @@ namespace HISWebAPI.DataAccess
         }
 
         #region Common
-        public DataTable GetItemsByMainCategory(int MainCategoryID, int ItemID)
-        {
-            objExecute = new Execute(_configuration);
-            SqlParameter[] param = new SqlParameter[]
-           {
-                Execute.AddParameter("@MainCategoryID",MainCategoryID),
-                Execute.AddParameter("@ItemID",ItemID)
-           };
-            DataTable dt = (DataTable)objExecute.Executes("spGetItemsByMainCategory", ReturnType.DataTable, param, CommandType.StoredProcedure);
-            return dt;
-        }
+        //public DataTable GetItemsByMainCategory(int MainCategoryID, int ItemID)
+        //{
+        //    objExecute = new Execute(_configuration);
+        //    SqlParameter[] param = new SqlParameter[]
+        //   {
+        //        Execute.AddParameter("@MainCategoryID",MainCategoryID),
+        //        Execute.AddParameter("@ItemID",ItemID)
+        //   };
+        //    DataTable dt = (DataTable)objExecute.Executes("spGetItemsByMainCategory", ReturnType.DataTable, param, CommandType.StoredProcedure);
+        //    return dt;
+        //}
         #endregion
 
         #region Computer
+
+        public DataTable GetComputer(int ItemID) {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+           { 
+                    Execute.AddParameter("@ItemID",ItemID)
+           };
+            DataTable dt = (DataTable)objExecute.Executes("Computer.spGetItem", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            return dt;
+        }
+
         public DataTable GetComputerModels()
         {
-            objExecute = new Execute(_configuration); 
-            DataTable dt = (DataTable)objExecute.Executes("spGetComputerModels", ReturnType.DataTable, CommandType.StoredProcedure);
+            objExecute = new Execute(_configuration);
+            DataTable dt = (DataTable)objExecute.Executes("Computer.spGetModel", ReturnType.DataTable, CommandType.StoredProcedure);
             return dt;
         }
 
         public DataTable GetOperatingSystem()
         {
             objExecute = new Execute(_configuration);
-            DataTable dt = (DataTable)objExecute.Executes("spGetOperatingSystem", ReturnType.DataTable, CommandType.StoredProcedure);
+            DataTable dt = (DataTable)objExecute.Executes("Computer.spGetOperatingSystem", ReturnType.DataTable, CommandType.StoredProcedure);
             return dt;
         }
 
-        public DataTable GetVirusGuard()
+        public DataTable GetProcessor()
         {
             objExecute = new Execute(_configuration);
-            DataTable dt = (DataTable)objExecute.Executes("spGetVirusGuard", ReturnType.DataTable, CommandType.StoredProcedure);
+            DataTable dt = (DataTable)objExecute.Executes("Computer.spGetProcessor", ReturnType.DataTable, CommandType.StoredProcedure);
             return dt;
         }
 
-        public DataTable GetProcessor() {
+        public DataTable GetRAM()
+        {
             objExecute = new Execute(_configuration);
-            DataTable dt = (DataTable)objExecute.Executes("spGetProcessor", ReturnType.DataTable, CommandType.StoredProcedure);
+            DataTable dt = (DataTable)objExecute.Executes("Computer.spGetRAM", ReturnType.DataTable, CommandType.StoredProcedure);
             return dt;
         }
 
-        public DataTable GetRAM() {
-            objExecute = new Execute(_configuration);
-            DataTable dt = (DataTable)objExecute.Executes("spGetRAM", ReturnType.DataTable, CommandType.StoredProcedure);
-            return dt;
-        }
+        public DataRow SaveComputer(Computer obj)
+        {   
+            objExecute = new Execute(_configuration); 
 
-        public DataRow SaveComputer(Computer obj) {
-            objExecute = new Execute(_configuration);
-            SqlParameter[] param = new SqlParameter[]
-           {
-                Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
-                Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
-                Execute.AddParameter("@FARCode",obj.FARCode),
-                Execute.AddParameter("@ComputerName",obj.ComputerName),
-                Execute.AddParameter("@IPAddress",obj.IPAddress),
-                Execute.AddParameter("@DepartmentID",obj.DepartmentID),
-                Execute.AddParameter("@SectionID",obj.SectionID),
-                Execute.AddParameter("@LoginUser",obj.LoginUser),
-                Execute.AddParameter("@User",obj.User),
-                Execute.AddParameter("@OperatingSystemID",obj.OperatingSystemID),
-                Execute.AddParameter("@VirusGuardID",obj.VirusGuardID),
-                Execute.AddParameter("@ProcessorID",obj.ProcessorID),
-                Execute.AddParameter("@RAMID",obj.RAMID),
-                Execute.AddParameter("@Capacity",obj.Capacity),
-                Execute.AddParameter("@ModelName",obj.ModelName),
-                Execute.AddParameter("@Remark",obj.Remark)
-           };
-            DataRow dr = (DataRow)objExecute.Executes("spSaveComputer", ReturnType.DataRow, param, CommandType.StoredProcedure);
-            return dr;
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                SqlParameter[] paramItem = new SqlParameter[]
+                {
+                        Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
+                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),    
+                        Execute.AddParameter("@SectionID",obj.SectionID),  
+                        Execute.AddParameter("@EnterdUserID",obj.Remark)
+                };
+
+                DataRow dr = (DataRow)objExecute.Executes("Computer.spSaveItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+
+                string ItemCode = dr["ItemCode"].ToString(); 
+
+            }
+
+            return null;
         }
 
         #endregion

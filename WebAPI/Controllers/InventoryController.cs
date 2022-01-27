@@ -28,15 +28,16 @@ namespace HISWebAPI.Controllers
         [Route("GetComputer/{ItemID}")]
         [HttpGet]
         public JsonResult GetComputer(int ItemID)
-        { 
+        {
             objInventoryDA = new InventoryDA(_configuration);
-            DataTable dt = objInventoryDA.GetItemsByMainCategory(1, ItemID);
+            DataTable dt = objInventoryDA.GetComputer(ItemID);
             return new JsonResult(dt);
         }
 
         [Route("GetComputerModels")]
         [HttpGet]
-        public JsonResult GetComputerModels() {
+        public JsonResult GetComputerModels()
+        {
             objInventoryDA = new InventoryDA(_configuration);
             DataTable dt = objInventoryDA.GetComputerModels();
             return new JsonResult(dt);
@@ -51,13 +52,7 @@ namespace HISWebAPI.Controllers
             return new JsonResult(dt);
         }
 
-        [Route("GetVirusGuard")]
-        [HttpGet]
-        public JsonResult GetVirusGuard() {
-            objInventoryDA = new InventoryDA(_configuration);
-            DataTable dt = objInventoryDA.GetVirusGuard();
-            return new JsonResult(dt);
-        }
+ 
 
         [Route("GetProcessor")]
         [HttpGet]

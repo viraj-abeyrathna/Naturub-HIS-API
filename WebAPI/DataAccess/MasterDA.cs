@@ -1,7 +1,9 @@
 ﻿using HISWebAPI.Common;
 using HISWebAPI.Enum;
+using HISWebAPI.Models;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -17,38 +19,38 @@ namespace HISWebAPI.DataAccess
             this._configuration = configuration;
         }
 
-        #region Data Set
-        public DataTable GetDataSet(int DataSetID)
-        {
-            objExecute = new Execute(_configuration);
-            SqlParameter[] param = new SqlParameter[]
-            {
-                Execute.AddParameter("@DataSetID",DataSetID)
-            };
-            DataTable dt = (DataTable)objExecute.Executes("spGetDataSet", ReturnType.DataTable, param, CommandType.StoredProcedure);
-            return dt;
-        }
+        //#region Data Set
+        //public DataTable GetDataSet(int DataSetID)
+        //{
+        //    objExecute = new Execute(_configuration);
+        //    SqlParameter[] param = new SqlParameter[]
+        //    {
+        //        Execute.AddParameter("@DataSetID",DataSetID)
+        //    };
+        //    DataTable dt = (DataTable)objExecute.Executes("spGetDataSet", ReturnType.DataTable, param, CommandType.StoredProcedure);
+        //    return dt;
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Component
-        public DataTable GetComponent(int ComponentID)
-        {
-            objExecute = new Execute(_configuration);
-            SqlParameter[] param = new SqlParameter[]
-            {
-                Execute.AddParameter("@ComponentID",ComponentID)
-            };
-            DataTable dt = (DataTable)objExecute.Executes("spGetComponent", ReturnType.DataTable, param, CommandType.StoredProcedure);
-            return dt;
-        }
-        #endregion
+        //#region Component
+        //public DataTable GetComponent(int ComponentID)
+        //{
+        //    objExecute = new Execute(_configuration);
+        //    SqlParameter[] param = new SqlParameter[]
+        //    {
+        //        Execute.AddParameter("@ComponentID",ComponentID)
+        //    };
+        //    DataTable dt = (DataTable)objExecute.Executes("spGetComponent", ReturnType.DataTable, param, CommandType.StoredProcedure);
+        //    return dt;
+        //}
+        //#endregion
 
         #region Department
 
         public DataTable GetDepartment() {
             objExecute = new Execute(_configuration);
-            DataTable dt = (DataTable)objExecute.Executes("spGetDepartment", ReturnType.DataTable, CommandType.StoredProcedure);
+            DataTable dt = (DataTable)objExecute.Executes("Master.spGetDepartment", ReturnType.DataTable, CommandType.StoredProcedure);
             return dt;
         }
 
@@ -63,7 +65,7 @@ namespace HISWebAPI.DataAccess
              {
                 Execute.AddParameter("@DepartmentID",DepartmentID)
              };
-            DataTable dt = (DataTable)objExecute.Executes("spGetSection", ReturnType.DataTable, param,CommandType.StoredProcedure);
+            DataTable dt = (DataTable)objExecute.Executes("Master.spGetSection", ReturnType.DataTable, param,CommandType.StoredProcedure);
             return dt;
         }
 
@@ -73,7 +75,7 @@ namespace HISWebAPI.DataAccess
         public DataTable GetMainCategory()
         {
             objExecute = new Execute(_configuration);
-            DataTable dt = (DataTable)objExecute.Executes("spGetMainCategory", ReturnType.DataTable, CommandType.StoredProcedure);
+            DataTable dt = (DataTable)objExecute.Executes("Master.spGetMainCategory", ReturnType.DataTable, CommandType.StoredProcedure);
             return dt;
         }
         #endregion
@@ -86,9 +88,36 @@ namespace HISWebAPI.DataAccess
              {
                 Execute.AddParameter("@MainCategoryID",MainCategoryID)
              };
-            DataTable dt = (DataTable)objExecute.Executes("spGetSubCategory", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            DataTable dt = (DataTable)objExecute.Executes("Master.spGetSubCategory", ReturnType.DataTable, param, CommandType.StoredProcedure);
             return dt;
         }
         #endregion
+
+        //#region Main Category Component
+
+        //public List<MainCategoryComponent> GetMainCategoryComponent(int MainCategoryID)
+        //{
+        //    List<MainCategoryComponent> lst = new List<MainCategoryComponent>();
+
+        //    objExecute = new Execute(_configuration);
+        //    SqlParameter[] param = new SqlParameter[]
+        //     {
+        //        Execute.AddParameter("@MainCategoryID",MainCategoryID)
+        //     };
+        //    DataTable dt = (DataTable)objExecute.Executes("spGetMainCategoryComponent", ReturnType.DataTable, param, CommandType.StoredProcedure);
+
+        //    foreach (DataRow dataRow in dt.Rows)
+        //    {
+        //        MainCategoryComponent obj = new MainCategoryComponent();
+        //        obj.MainCategoryComponentID = Convert.ToInt32(dataRow["MainCategoryComponentID"]);
+        //        obj.ComponentID = Convert.ToInt32(dataRow["ComponentID"]);
+        //        obj.ComponentName = dataRow["ComponentName"].ToString();
+
+        //        lst.Add(obj);
+        //    }
+
+        //    return lst;
+        //}
+        //#endregion
     }
 }
