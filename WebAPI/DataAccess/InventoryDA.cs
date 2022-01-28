@@ -77,8 +77,9 @@ namespace HISWebAPI.DataAccess
             return dt;
         }
 
-        public DataRow SaveComputer(Computer obj)
-        {   
+        public string SaveComputer(Computer obj)
+        {
+            string ItemCode = "";
             objExecute = new Execute(_configuration); 
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
@@ -91,13 +92,12 @@ namespace HISWebAPI.DataAccess
                         Execute.AddParameter("@EnterdUserID",obj.Remark)
                 };
 
-                DataRow dr = (DataRow)objExecute.Executes("Computer.spSaveItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+                DataRow dr = (DataRow)objExecute.Executes("Computer.spSave", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
 
-                string ItemCode = dr["ItemCode"].ToString(); 
-
+                ItemCode = dr["ItemCode"].ToString(); 
             }
 
-            return null;
+            return ItemCode;
         }
 
         #endregion

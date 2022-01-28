@@ -77,8 +77,8 @@ namespace HISWebAPI.Controllers
         public JsonResult SaveComputer(Computer obj)
         {
             objInventoryDA = new InventoryDA(_configuration);
-            DataRow dr = objInventoryDA.SaveComputer(obj);
-            return new JsonResult(dr);
+            string ItemCode = objInventoryDA.SaveComputer(obj);
+            return new JsonResult(ItemCode);
         }
 
         #endregion

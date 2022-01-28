@@ -26,32 +26,7 @@ namespace HISWebAPI.Controllers
         {
             _configuration = configuration;
         }
-
-        #region Data Set
-
-        [Route("GetDataSet/{id}")]
-        [HttpGet]
-        public JsonResult GetDataSet(int id)
-        {
-            objMasterDA = new MasterDA(_configuration);
-            DataTable dt = objMasterDA.GetDataSet(id); 
-            return new JsonResult(dt);
-        }
-
-        #endregion
-
-        #region Component
-
-        [Route("GetComponent/{id}")]
-        [HttpGet]
-        public JsonResult GetComponent(int id)
-        {
-            objMasterDA = new MasterDA(_configuration);
-            DataTable dt = objMasterDA.GetComponent(id);
-            return new JsonResult(dt);
-        }
-
-        #endregion
+  
 
         #region Department
 
