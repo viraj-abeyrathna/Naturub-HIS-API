@@ -86,10 +86,22 @@ namespace HISWebAPI.DataAccess
             {
                 SqlParameter[] paramItem = new SqlParameter[]
                 {
+                        Execute.AddParameter("@ComputerName",obj.ComputerName),
+                        Execute.AddParameter("@IPAddress",obj.IPAddress),
                         Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
-                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),    
-                        Execute.AddParameter("@SectionID",obj.SectionID),  
-                        Execute.AddParameter("@EnterdUserID",obj.Remark)
+                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
+                        Execute.AddParameter("@SectionID",obj.SectionID),
+                        Execute.AddParameter("@FARBarcodeNo",obj.FARBarcodeNo),
+                        Execute.AddParameter("@LoginUser",obj.LoginUser),
+                        Execute.AddParameter("@AuthorizedUser",obj.AuthorizedUser),
+                        Execute.AddParameter("@ModelName",obj.ModelName),
+                        Execute.AddParameter("@OperatingSystemID",obj.OperatingSystemID),
+                        Execute.AddParameter("@IsVirusGuardActive",obj.IsVirusGuardActive),
+                        Execute.AddParameter("@ProcessorID",obj.ProcessorID),
+                        Execute.AddParameter("@RAMID",obj.RAMID),
+                        Execute.AddParameter("@Capacity",obj.Capacity), 
+                        Execute.AddParameter("@Remark",obj.Remark), 
+                        Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
                 };
 
                 DataRow dr = (DataRow)objExecute.Executes("Computer.spSave", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
