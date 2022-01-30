@@ -79,5 +79,18 @@ namespace HISWebAPI.Controllers
         }
 
         #endregion
+
+        #region Brand
+
+        [Route("GetBrand/{MainCategoryID}")]
+        [HttpGet]
+        public JsonResult GetBrand(int MainCategoryID)
+        {
+            objMasterDA = new MasterDA(_configuration);
+            DataTable dt = objMasterDA.GetBrand(MainCategoryID);
+            return new JsonResult(dt);
+        }
+
+        #endregion
     }
 }

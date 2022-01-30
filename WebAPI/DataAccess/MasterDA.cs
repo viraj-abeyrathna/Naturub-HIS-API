@@ -93,6 +93,19 @@ namespace HISWebAPI.DataAccess
         }
         #endregion
 
+        #region Brand
+        public DataTable GetBrand(int MainCategoryID)
+        {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+             {
+                Execute.AddParameter("@MainCategoryID",MainCategoryID)
+             };
+            DataTable dt = (DataTable)objExecute.Executes("Master.spGetBrand", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            return dt;
+        }
+        #endregion
+
         //#region Main Category Component
 
         //public List<MainCategoryComponent> GetMainCategoryComponent(int MainCategoryID)
