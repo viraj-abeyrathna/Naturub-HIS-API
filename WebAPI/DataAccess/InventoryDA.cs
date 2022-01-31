@@ -37,12 +37,28 @@ namespace HISWebAPI.DataAccess
         //}
         #endregion
 
-        #region Computer
+        #region Validator
 
-        public DataTable GetComputer(int ItemID) {
+        public DataTable GetIPAddress(string IPAddress)
+        {
             objExecute = new Execute(_configuration);
             SqlParameter[] param = new SqlParameter[]
-           { 
+           {
+                    Execute.AddParameter("@IPAddress",IPAddress)
+           };
+            DataTable dt = (DataTable)objExecute.Executes("Computer.spGetIPAddress", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        #endregion
+
+        #region Computer
+
+        public DataTable GetComputer(int ItemID)
+        {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+           {
                     Execute.AddParameter("@ItemID",ItemID)
            };
             DataTable dt = (DataTable)objExecute.Executes("Computer.spGetItem", ReturnType.DataTable, param, CommandType.StoredProcedure);
@@ -80,7 +96,7 @@ namespace HISWebAPI.DataAccess
         public string SaveComputer(Computer obj)
         {
             string ItemCode = "";
-            objExecute = new Execute(_configuration); 
+            objExecute = new Execute(_configuration);
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
             {
@@ -99,8 +115,8 @@ namespace HISWebAPI.DataAccess
                         Execute.AddParameter("@IsVirusGuardActive",obj.IsVirusGuardActive),
                         Execute.AddParameter("@ProcessorID",obj.ProcessorID),
                         Execute.AddParameter("@RAMID",obj.RAMID),
-                        Execute.AddParameter("@Capacity",obj.Capacity), 
-                        Execute.AddParameter("@Remark",obj.Remark), 
+                        Execute.AddParameter("@Capacity",obj.Capacity),
+                        Execute.AddParameter("@Remark",obj.Remark),
                         Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
                 };
 
@@ -143,7 +159,7 @@ namespace HISWebAPI.DataAccess
             {
                 SqlParameter[] paramItem = new SqlParameter[]
                 {
- 
+
                         Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
                         Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
                         Execute.AddParameter("@SectionID",obj.SectionID),
@@ -236,6 +252,8 @@ namespace HISWebAPI.DataAccess
             return dt;
         }
         #endregion
+
+
 
     }
 }
