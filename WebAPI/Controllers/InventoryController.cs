@@ -72,6 +72,15 @@ namespace HISWebAPI.Controllers
             return new JsonResult(dt);
         }
 
+        [Route("GetIPAddress/{IPAddress}")]
+        [HttpGet]
+        public JsonResult GetIPAddress(string IPAddress)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetIPAddress(IPAddress);
+            return new JsonResult(dt);
+        }
+
         [Route("SaveComputer")]
         [HttpPost]
         public JsonResult SaveComputer(Computer obj)
