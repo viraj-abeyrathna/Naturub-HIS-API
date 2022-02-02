@@ -238,9 +238,39 @@ namespace HISWebAPI.DataAccess
             DataTable dt = (DataTable)objExecute.Executes("CCTV.spGetItem", ReturnType.DataTable, param, CommandType.StoredProcedure);
             return dt;
         }
+
+        public string SaveCctv(Cctvc obj)
+        {
+            string ItemCode = "";
+            objExecute = new Execute(_configuration);
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                SqlParameter[] paramItem = new SqlParameter[]
+                {
+
+                        Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
+                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
+                        Execute.AddParameter("@SectionID",obj.SectionID),
+                        Execute.AddParameter("@BrandID",obj.BrandID),
+                        Execute.AddParameter("@ModelName",obj.ModelName),
+                        Execute.AddParameter("@FARBarcodeNo",obj.FARBarcodeNo),
+                        Execute.AddParameter("@SerialNo",obj.SerialNo),
+                        Execute.AddParameter("@Remark",obj.Remark),
+                        Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
+                };
+
+                DataRow dr = (DataRow)objExecute.Executes("CCTV.spSaveItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+
+                ItemCode = dr["ItemCode"].ToString();
+                scope.Complete();
+            }
+
+            return ItemCode;
+        }
         #endregion
 
-        #region CCTV
+        #region DVR
         public DataTable GetDVR(int ItemID)
         {
             objExecute = new Execute(_configuration);
@@ -251,9 +281,107 @@ namespace HISWebAPI.DataAccess
             DataTable dt = (DataTable)objExecute.Executes("DVR.spGetItem", ReturnType.DataTable, param, CommandType.StoredProcedure);
             return dt;
         }
+
+        public DataTable GetDvrType()
+        {
+            objExecute = new Execute(_configuration);
+            DataTable dt = (DataTable)objExecute.Executes("DVR.spGetDvrType", ReturnType.DataTable, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        public string SaveDvr(Dvr obj)
+        {
+            string ItemCode = "";
+            objExecute = new Execute(_configuration);
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                SqlParameter[] paramItem = new SqlParameter[]
+                {
+
+                        Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
+                        Execute.AddParameter("@TypeID",obj.TypeID),
+                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
+                        Execute.AddParameter("@SectionID",obj.SectionID),
+                        Execute.AddParameter("@BrandID",obj.BrandID),
+                        Execute.AddParameter("@ModelName",obj.ModelName),
+                        Execute.AddParameter("@FARBarcodeNo",obj.FARBarcodeNo),
+                        Execute.AddParameter("@SerialNo",obj.SerialNo),
+                        Execute.AddParameter("@Remark",obj.Remark),
+                        Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
+                };
+
+                DataRow dr = (DataRow)objExecute.Executes("DVR.spSaveItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+
+                ItemCode = dr["ItemCode"].ToString();
+                scope.Complete();
+            }
+
+            return ItemCode;
+        }
+
+        #endregion
+
+        #region Ethernet-Switch
+
+        public DataTable GetEthernetSwitch(int ItemID)
+        {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+            {
+                    Execute.AddParameter("@ItemID",ItemID)
+            };
+            DataTable dt = (DataTable)objExecute.Executes("EthernetSwitch.spGetItem", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        public string SaveEthernetSwitch(EthernetSwitch obj)
+        {
+            string ItemCode = "";
+            objExecute = new Execute(_configuration);
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                SqlParameter[] paramItem = new SqlParameter[]
+                {
+
+                        Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
+                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
+                        Execute.AddParameter("@SectionID",obj.SectionID),
+                        Execute.AddParameter("@BrandID",obj.BrandID),
+                        Execute.AddParameter("@IPAddress",obj.IPAddress),
+                        Execute.AddParameter("@ModelName",obj.ModelName),
+                        Execute.AddParameter("@FARBarcodeNo",obj.FARBarcodeNo),
+                        Execute.AddParameter("@SerialNo",obj.SerialNo),
+                        Execute.AddParameter("@Remark",obj.Remark),
+                        Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
+                };
+
+                DataRow dr = (DataRow)objExecute.Executes("EthernetSwitch.spSaveItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+
+                ItemCode = dr["ItemCode"].ToString();
+                scope.Complete();
+            }
+
+            return ItemCode;
+        }
+
         #endregion
 
 
+        #region Mobile-Phone
+        public DataTable GetMobilePhone(int ItemID)
+        {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+            {
+                    Execute.AddParameter("@ItemID",ItemID)
+            };
+            DataTable dt = (DataTable)objExecute.Executes("MobilePhone.spGetItem", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        #endregion
 
     }
 }

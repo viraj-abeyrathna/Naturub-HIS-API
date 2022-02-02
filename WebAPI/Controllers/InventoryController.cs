@@ -52,7 +52,7 @@ namespace HISWebAPI.Controllers
             return new JsonResult(dt);
         }
 
- 
+
 
         [Route("GetProcessor")]
         [HttpGet]
@@ -104,7 +104,7 @@ namespace HISWebAPI.Controllers
             return new JsonResult(dt);
         }
 
-        
+
         [Route("GetCapacity")]
         [HttpGet]
         public JsonResult GetCapacity()
@@ -158,10 +158,19 @@ namespace HISWebAPI.Controllers
             return new JsonResult(dt);
         }
 
+        [Route("SaveCctv")]
+        [HttpPost]
+        public JsonResult SaveCctv(Cctvc obj)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            string ItemCode = objInventoryDA.SaveCctv(obj);
+            return new JsonResult(ItemCode);
+        }
+
+
         #endregion
 
         #region DVR
-
         [Route("GetDVR/{ItemID}")]
         [HttpGet]
         public JsonResult GetDVR(int ItemID)
@@ -171,6 +180,61 @@ namespace HISWebAPI.Controllers
             return new JsonResult(dt);
         }
 
+        [Route("GetDvrType")]
+        [HttpGet]
+        public JsonResult GetDvrType()
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetDvrType();
+            return new JsonResult(dt);
+        }
+
+        [Route("SaveDvr")]
+        [HttpPost]
+        public JsonResult SaveDvr(Dvr obj)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            string ItemCode = objInventoryDA.SaveDvr(obj);
+            return new JsonResult(ItemCode);
+        }
         #endregion
+
+
+        #region Ethernet-Switch
+        [Route("GetEthernetSwitch/{ItemID}")]
+        [HttpGet]
+        public JsonResult GetEthernetSwitch(int ItemID)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetEthernetSwitch(ItemID);
+            return new JsonResult(dt);
+        }
+
+
+        [Route("SaveEthernetSwitch")]
+        [HttpPost]
+        public JsonResult SaveEthernetSwitch(EthernetSwitch obj)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            string ItemCode = objInventoryDA.SaveEthernetSwitch(obj);
+            return new JsonResult(ItemCode);
+        }
+
+        #endregion
+
+        #region Mobile-Phone
+        [Route("GetMobilePhone/{ItemID}")]
+        [HttpGet]
+        public JsonResult GetMobilePhone(int ItemID)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            DataTable dt = objInventoryDA.GetMobilePhone(ItemID);
+            return new JsonResult(dt);
+        }
+
+        #endregion
+
+
+
     }
 }
