@@ -90,6 +90,16 @@ namespace HISWebAPI.Controllers
             return new JsonResult(ItemCode);
         }
 
+        [Route("UpdateComputer")]
+        [HttpPost]
+        public JsonResult UpdateComputer(Computer obj)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            string ItemCode = objInventoryDA.UpdateComputer(obj);
+            return new JsonResult(ItemCode);
+        }
+
+
         #endregion
 
 
