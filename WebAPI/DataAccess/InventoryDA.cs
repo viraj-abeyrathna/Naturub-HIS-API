@@ -129,6 +129,42 @@ namespace HISWebAPI.DataAccess
             return ItemCode;
         }
 
+
+        public string UpdateComputer(Computer obj)
+        {
+            string ItemCode = "";
+            objExecute = new Execute(_configuration);
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                SqlParameter[] paramItem = new SqlParameter[]
+                {
+                        Execute.AddParameter("@ItemID",obj.ItemID),
+                        Execute.AddParameter("@ComputerName",obj.ComputerName),
+                        Execute.AddParameter("@IPAddress",obj.IPAddress),
+                        Execute.AddParameter("@SectionID",obj.SectionID),
+                        Execute.AddParameter("@FARBarcodeNo",obj.FARBarcodeNo),
+                        Execute.AddParameter("@LoginUser",obj.LoginUser),
+                        Execute.AddParameter("@AuthorizedUser",obj.AuthorizedUser),
+                        Execute.AddParameter("@ModelName",obj.ModelName),
+                        Execute.AddParameter("@OperatingSystemID",obj.OperatingSystemID),
+                        Execute.AddParameter("@IsVirusGuardActive",obj.IsVirusGuardActive),
+                        Execute.AddParameter("@ProcessorID",obj.ProcessorID),
+                        Execute.AddParameter("@RAMID",obj.RAMID),
+                        Execute.AddParameter("@Capacity",obj.Capacity),
+                        Execute.AddParameter("@Remark",obj.Remark),
+                        Execute.AddParameter("@LastModifiedUserID",obj.LastModifiedUserID)
+                };
+
+                DataRow dr = (DataRow)objExecute.Executes("Computer.spUpdate", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+
+                ItemCode = dr["ItemCode"].ToString();
+                scope.Complete();
+            }
+
+            return ItemCode;
+        }
+
         #endregion
 
         #region Ups
