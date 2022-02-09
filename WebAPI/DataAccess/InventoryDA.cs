@@ -153,7 +153,8 @@ namespace HISWebAPI.DataAccess
                         Execute.AddParameter("@RAMID",obj.RAMID),
                         Execute.AddParameter("@Capacity",obj.Capacity),
                         Execute.AddParameter("@Remark",obj.Remark),
-                        Execute.AddParameter("@LastModifiedUserID",obj.LastModifiedUserID)
+                        Execute.AddParameter("@LastModifiedUserID",obj.LastModifiedUserID),
+                        Execute.AddParameter("@IsUpgrade",obj.IsUpgrade)
                 };
 
                 DataRow dr = (DataRow)objExecute.Executes("Computer.spUpdate", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);

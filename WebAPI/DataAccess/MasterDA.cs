@@ -106,6 +106,25 @@ namespace HISWebAPI.DataAccess
         }
         #endregion
 
+        #region Maintenance
+
+        public DataTable GetMaintenanceType() {
+            objExecute = new Execute(_configuration); 
+            DataTable dt = (DataTable)objExecute.Executes("Master.spGetMaintenanceType", ReturnType.DataTable, CommandType.StoredProcedure);
+            return dt;
+        }
+
+        public DataTable GetMaintenancePart(int subCategoryID) {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+             {
+                Execute.AddParameter("@SubCategoryID",subCategoryID)
+             };
+            DataTable dt = (DataTable)objExecute.Executes("Master.spGetMaintenancePart", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            return dt;
+        }
+        #endregion
+
         //#region Main Category Component
 
         //public List<MainCategoryComponent> GetMainCategoryComponent(int MainCategoryID)

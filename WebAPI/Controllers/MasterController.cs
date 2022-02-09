@@ -92,5 +92,25 @@ namespace HISWebAPI.Controllers
         }
 
         #endregion
+
+        #region Maintenance
+
+        [Route("GetMaintenanceType")]
+        [HttpGet]
+        public JsonResult GetMaintenanceType() {
+            objMasterDA = new MasterDA(_configuration);
+            DataTable dt = objMasterDA.GetMaintenanceType();
+            return new JsonResult(dt);
+        }
+
+        [Route("GetMaintenancePart/{SubCategoryID}")]
+        [HttpGet]
+        public JsonResult GetMaintenancePart(int SubCategoryID) {
+            objMasterDA = new MasterDA(_configuration);
+            DataTable dt = objMasterDA.GetMaintenancePart(SubCategoryID);
+            return new JsonResult(dt);
+        }
+
+        #endregion
     }
 }

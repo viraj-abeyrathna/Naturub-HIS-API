@@ -36,5 +36,8 @@ namespace HISWebAPI.Models
         public int EnterdUserID { get; set; }
         public string LastModifiedUser { get; set; }
         public int LastModifiedUserID { get; set; }
+
+        public bool IsUpgrade { get; set; } // Upgrade Mode
+
     }
 }
