@@ -48,8 +48,14 @@ E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\HISWebAPI.ru
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\HISWebAPI.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\ref\HISWebAPI.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\HISWebAPI.pdb
+E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.IdentityModel.Logging.dll
+E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.IdentityModel.Protocols.dll
+E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.IdentityModel.Tokens.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Microsoft.OpenApi.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Newtonsoft.Json.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Newtonsoft.Json.Bson.dll
@@ -59,6 +65,7 @@ E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Swashbuckle.
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\System.Data.SqlClient.dll
+E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\System.IdentityModel.Tokens.Jwt.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\runtimes\win-arm64\native\sni.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\runtimes\win-x64\native\sni.dll
 E:\ViRAJ\Viraj\Repo\Naturub-HIS\HISWebAPI\WebAPI\bin\Release\net5.0\runtimes\win-x86\native\sni.dll

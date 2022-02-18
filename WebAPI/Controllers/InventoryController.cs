@@ -1,5 +1,6 @@
 ﻿using HISWebAPI.DataAccess;
 using HISWebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,7 +13,8 @@ namespace HISWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InventoryController : Controller
+    [Authorize]
+    public class InventoryController : ControllerBase
     {
         private readonly IConfiguration _configuration;
 
@@ -25,13 +27,28 @@ namespace HISWebAPI.Controllers
 
         #region Computer
 
-        [Route("GetComputer/{ItemID}")]
-        [HttpGet]
+        //[Route("GetComputer/{ItemID}")]
+        [HttpGet("GetComputer/{ItemID}")]
+        [Authorize]
         public JsonResult GetComputer(int ItemID)
         {
             objInventoryDA = new InventoryDA(_configuration);
             DataTable dt = objInventoryDA.GetComputer(ItemID);
             return new JsonResult(dt);
+        }
+
+        [HttpGet("GetComputer_Test")]
+        [Authorize]
+        public ActionResult GetComputer_Test()
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+
+            return Ok(new LoginResult
+            {
+                UserName = "TestUser",
+                Role = "TestRole",
+                OriginalUserName = "TestOriginUser"
+            });
         }
 
         [Route("GetComputerModels")]
