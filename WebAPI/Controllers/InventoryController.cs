@@ -37,20 +37,6 @@ namespace HISWebAPI.Controllers
             return new JsonResult(dt);
         }
 
-        [HttpGet("GetComputer_Test")]
-        [Authorize]
-        public ActionResult GetComputer_Test()
-        {
-            objInventoryDA = new InventoryDA(_configuration);
-
-            return Ok(new LoginResult
-            {
-                UserName = "TestUser",
-                Role = "TestRole",
-                OriginalUserName = "TestOriginUser"
-            });
-        }
-
         [Route("GetComputerModels")]
         [HttpGet]
         public JsonResult GetComputerModels()

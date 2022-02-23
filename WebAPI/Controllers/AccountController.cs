@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -205,22 +206,28 @@ namespace HISWebAPI.Controllers
 
     public class LoginResult
     {
-        [JsonPropertyName("username")]
+        //[JsonPropertyName("username")]
+        [JsonProperty(PropertyName = "username")]
         public string UserName { get; set; }
 
-        [JsonPropertyName("role")]
+        //[JsonPropertyName("role")]
+        [JsonProperty(PropertyName = "role")]
         public string Role { get; set; }
 
-        [JsonPropertyName("originalUserName")]
+        //[JsonPropertyName("originalUserName")]
+        [JsonProperty(PropertyName = "originalUserName")]
         public string OriginalUserName { get; set; }
 
-        [JsonPropertyName("accessToken")]
+        //[JsonPropertyName("accessToken")]
+        [JsonProperty(PropertyName = "accessToken")]
         public string AccessToken { get; set; }
 
-        [JsonPropertyName("refreshToken")]
+        //[JsonPropertyName("refreshToken")]
+        [JsonProperty(PropertyName = "refreshToken")]
         public string RefreshToken { get; set; }
 
-        [JsonPropertyName("isAdmin")]
+        //[JsonPropertyName("isAdmin")]
+        [JsonProperty(PropertyName = "isAdmin")]
         public bool IsAdmin { get; set; }
     }
 
