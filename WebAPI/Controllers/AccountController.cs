@@ -48,22 +48,28 @@ namespace HISWebAPI.Controllers
                 return Unauthorized();
             }
 
-            var role = _userService.GetUserRole(request.UserName);
+            LoginResult user = _userService.GetUserRole(request.UserName);
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name,request.UserName),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(ClaimTypes.Role, user.UserGroupName)
             };
 
             var jwtResult = _jwtAuthManager.GenerateTokens(request.UserName, claims, DateTime.Now);
             _logger.LogInformation($"User [{request.UserName}] logged in the system.");
             return Ok(new LoginResult
             {
+                UserID = user.UserID,
                 UserName = request.UserName,
-                Role = role,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                IsAdmin = user.IsAdmin,
+                ProfilePhoto = user.ProfilePhoto,
+                UserGroupID = user.UserGroupID,
+                UserGroupName = user.UserGroupName,  
                 AccessToken = jwtResult.AccessToken,
-                RefreshToken = jwtResult.RefreshToken.TokenString,
-                IsAdmin = role.Equals("Admin") ? true : false
+                RefreshToken = jwtResult.RefreshToken.TokenString
             });
         }
 
@@ -74,8 +80,8 @@ namespace HISWebAPI.Controllers
             return Ok(new LoginResult
             {
                 UserName = User.Identity?.Name,
-                Role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty,
-                OriginalUserName = User.FindFirst("OriginalUserName")?.Value
+                UserGroupName = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty
+                //OriginalUserName = User.FindFirst("OriginalUserName")?.Value
             });
         }
 
@@ -106,15 +112,29 @@ namespace HISWebAPI.Controllers
                     return Unauthorized();
                 }
 
+                LoginResult user = _userService.GetUserRole(userName);
+
                 var accessToken = await HttpContext.GetTokenAsync("Bearer", "access_token");
                 var jwtResult = _jwtAuthManager.Refresh(request.RefreshToken, accessToken, DateTime.Now);
                 _logger.LogInformation($"User [{userName}] has refreshed JWT token.");
                 return Ok(new LoginResult
                 {
+                    UserID = user.UserID,
                     UserName = userName,
-                    Role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    IsAdmin = user.IsAdmin,
+                    ProfilePhoto = user.ProfilePhoto,
+                    UserGroupID = user.UserGroupID,
+                    UserGroupName = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty,
                     AccessToken = jwtResult.AccessToken,
                     RefreshToken = jwtResult.RefreshToken.TokenString
+
+                    //UserName = userName,
+                    //UserGroupName = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty,
+                    //AccessToken = jwtResult.AccessToken,
+                    //RefreshToken = jwtResult.RefreshToken.TokenString
                 });
             }
             catch (SecurityTokenException e)
@@ -130,13 +150,13 @@ namespace HISWebAPI.Controllers
             var userName = User.Identity?.Name;
             _logger.LogInformation($"User [{userName}] is trying to impersonate [{request.UserName}].");
 
-            var impersonatedRole = _userService.GetUserRole(request.UserName);
-            if (string.IsNullOrWhiteSpace(impersonatedRole))
+            LoginResult impersonatedRole = _userService.GetUserRole(request.UserName);
+            if (string.IsNullOrWhiteSpace(impersonatedRole.UserGroupName))
             {
                 _logger.LogInformation($"User [{userName}] failed to impersonate [{request.UserName}] due to the target user not found.");
                 return BadRequest($"The target user [{request.UserName}] is not found.");
             }
-            if (impersonatedRole == UserRoles.Admin)
+            if (impersonatedRole.UserGroupName == UserRoles.Admin)
             {
                 _logger.LogInformation($"User [{userName}] is not allowed to impersonate another Admin.");
                 return BadRequest("This action is not supported.");
@@ -145,7 +165,7 @@ namespace HISWebAPI.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name,request.UserName),
-                new Claim(ClaimTypes.Role, impersonatedRole),
+                new Claim(ClaimTypes.Role, impersonatedRole.UserGroupName),
                 new Claim("OriginalUserName", userName ?? string.Empty)
             };
 
@@ -154,10 +174,21 @@ namespace HISWebAPI.Controllers
             return Ok(new LoginResult
             {
                 UserName = request.UserName,
-                Role = impersonatedRole,
-                OriginalUserName = userName,
+                FirstName = impersonatedRole.FirstName,
+                LastName = impersonatedRole.LastName,
+                Email = impersonatedRole.Email,
+                IsAdmin = impersonatedRole.IsAdmin,
+                ProfilePhoto = impersonatedRole.ProfilePhoto,
+                UserGroupID = impersonatedRole.UserGroupID,
+                UserGroupName = impersonatedRole.UserGroupName,
                 AccessToken = jwtResult.AccessToken,
-                RefreshToken = jwtResult.RefreshToken.TokenString
+                RefreshToken = jwtResult.RefreshToken.TokenString,
+
+                //UserName = request.UserName,
+                //UserGroupName = impersonatedRole,
+                //OriginalUserName = userName,
+                //AccessToken = jwtResult.AccessToken,
+                //RefreshToken = jwtResult.RefreshToken.TokenString
             });
         }
 
@@ -172,22 +203,33 @@ namespace HISWebAPI.Controllers
             }
             _logger.LogInformation($"User [{originalUserName}] is trying to stop impersonate [{userName}].");
 
-            var role = _userService.GetUserRole(originalUserName);
+            LoginResult userData = _userService.GetUserRole(originalUserName);
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name,originalUserName),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(ClaimTypes.Role, userData.UserGroupName)
             };
 
             var jwtResult = _jwtAuthManager.GenerateTokens(originalUserName, claims, DateTime.Now);
             _logger.LogInformation($"User [{originalUserName}] has stopped impersonation.");
             return Ok(new LoginResult
             {
-                UserName = originalUserName,
-                Role = role,
-                OriginalUserName = null,
+                //UserName = originalUserName,
+                //UserGroupName = role,
+                //OriginalUserName = null,
+                //AccessToken = jwtResult.AccessToken,
+                //RefreshToken = jwtResult.RefreshToken.TokenString
+
+                UserName = userName,
+                FirstName = userData.FirstName,
+                LastName = userData.LastName,
+                Email = userData.Email,
+                IsAdmin = userData.IsAdmin,
+                ProfilePhoto = userData.ProfilePhoto,
+                UserGroupID = userData.UserGroupID,
+                UserGroupName = userData.UserGroupName,
                 AccessToken = jwtResult.AccessToken,
-                RefreshToken = jwtResult.RefreshToken.TokenString
+                RefreshToken = jwtResult.RefreshToken.TokenString,
             });
         }
     }
@@ -207,16 +249,26 @@ namespace HISWebAPI.Controllers
     public class LoginResult
     {
         //[JsonPropertyName("username")]
-        [JsonProperty(PropertyName = "username")]
-        public string UserName { get; set; }
+        [JsonProperty(PropertyName = "userID")]
+        public int UserID { get; set; }
 
-        //[JsonPropertyName("role")]
-        [JsonProperty(PropertyName = "role")]
-        public string Role { get; set; }
+        [JsonProperty(PropertyName = "userName")]
+        public string UserName { get; set; } 
 
-        //[JsonPropertyName("originalUserName")]
-        [JsonProperty(PropertyName = "originalUserName")]
-        public string OriginalUserName { get; set; }
+        [JsonProperty(PropertyName = "userGroupID")]
+        public int UserGroupID { get; set; }
+
+        [JsonProperty(PropertyName = "userGroupName")]
+        public string UserGroupName { get; set; }
+
+        [JsonProperty(PropertyName = "firstName")]
+        public string FirstName { get; set; }
+
+        [JsonProperty(PropertyName = "lastName")]
+        public string LastName { get; set; }
+
+        [JsonProperty(PropertyName = "email")]
+        public string Email { get; set; }  
 
         //[JsonPropertyName("accessToken")]
         [JsonProperty(PropertyName = "accessToken")]
@@ -229,6 +281,10 @@ namespace HISWebAPI.Controllers
         //[JsonPropertyName("isAdmin")]
         [JsonProperty(PropertyName = "isAdmin")]
         public bool IsAdmin { get; set; }
+
+        [JsonProperty(PropertyName = "profilePhoto")]
+        public string ProfilePhoto { get; set; }
+        
     }
 
     public class RefreshTokenRequest

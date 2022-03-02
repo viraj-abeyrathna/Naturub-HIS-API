@@ -12,5 +12,7 @@ namespace HISWebAPI.Models
         public int MaintenanceTypeID { get; set; }
         public int MaintenancePartID { get; set; }
         public string Remark { get; set; }
+        public int EnterdUser { get; set; }
+        public DateTime EnterdDate { get; set; }
     }
 }

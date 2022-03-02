@@ -35,7 +35,9 @@ namespace HISWebAPI.DataAccess
                         Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
                         Execute.AddParameter("@MaintenanceTypeID",obj.MaintenanceTypeID),
                         Execute.AddParameter("@MaintenancePartID",obj.MaintenancePartID), 
-                        Execute.AddParameter("@Remark",obj.Remark) 
+                        Execute.AddParameter("@Remark",obj.Remark),
+                        Execute.AddParameter("@UserID",obj.EnterdUser)
+                        
                 };
 
                 DataRow dr = (DataRow)objExecute.Executes("Maintenance.spSaveJobCard", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);

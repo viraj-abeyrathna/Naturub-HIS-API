@@ -1,4 +1,5 @@
-﻿using HISWebAPI.DataAccess;
+﻿using HISWebAPI.Controllers;
+using HISWebAPI.DataAccess;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,7 +14,7 @@ namespace HISWebAPI.Services
     {
         //bool IsAnExistingUser(string userName);
         bool IsValidUserCredentials(string userName, string password);
-        string GetUserRole(string userName);
+        LoginResult GetUserRole(string userName);
     }
 
     public class UserService : IUserService
@@ -71,24 +72,30 @@ namespace HISWebAPI.Services
         //    return _users.ContainsKey(userName);
         //}
 
-        public string GetUserRole(string userName)
+        public LoginResult GetUserRole(string userName)
         {
             //if (!IsAnExistingUser(userName))
             //{
             //    return string.Empty;
             //}
 
+            LoginResult obj = new LoginResult();
+
             objAccountDA = new AccountDA(_configuration);
             objAccountDA.GetUser(userName);
 
             DataTable dt = objAccountDA.GetUser(userName);
 
-            if (Convert.ToBoolean(dt.Rows[0]["IsAdmin"]))
-            {
-                return UserRoles.Admin;
-            } 
+            obj.UserID = Convert.ToInt32(dt.Rows[0]["UserID"]);
+            obj.FirstName = dt.Rows[0]["FirstName"].ToString();
+            obj.LastName = dt.Rows[0]["LastName"].ToString();
+            obj.Email = dt.Rows[0]["Email"].ToString();
+            obj.IsAdmin = Convert.ToBoolean(dt.Rows[0]["IsAdmin"]);
+            obj.ProfilePhoto = dt.Rows[0]["ProfilePhoto"].ToString();
+            obj.UserGroupName = dt.Rows[0]["UserGroupName"].ToString();
+            obj.UserGroupID = Convert.ToInt32(dt.Rows[0]["UserGroupID"]); 
 
-            return UserRoles.BasicUser;
+            return obj; 
         }
     }
 
