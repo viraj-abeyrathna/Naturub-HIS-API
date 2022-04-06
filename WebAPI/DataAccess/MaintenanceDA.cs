@@ -48,5 +48,17 @@ namespace HISWebAPI.DataAccess
 
             return ItemCode;
         }
+
+        public DataTable GetJobCard(int jobCardID)
+        {
+            objExecute = new Execute(_configuration);
+            SqlParameter[] param = new SqlParameter[]
+           {
+                    Execute.AddParameter("@JobCardID",jobCardID)
+           };
+            DataTable dt = (DataTable)objExecute.Executes("Maintenance.spGetJobCard", ReturnType.DataTable, param, CommandType.StoredProcedure);
+            return dt;
+        }
+        
     }
 }

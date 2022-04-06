@@ -1230,19 +1230,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\viraj.lasitha\\.nuget\\packages\\": {}
+    "C:\\Users\\RAMOD.KAUSHAN\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ViRAJ\\Viraj\\Repo\\Naturub-HIS\\HISWebAPI\\WebAPI\\HISWebAPI.csproj",
+      "projectUniqueName": "F:\\HIS\\HISWebAPI\\WebAPI\\HISWebAPI.csproj",
       "projectName": "HISWebAPI",
-      "projectPath": "E:\\ViRAJ\\Viraj\\Repo\\Naturub-HIS\\HISWebAPI\\WebAPI\\HISWebAPI.csproj",
-      "packagesPath": "C:\\Users\\viraj.lasitha\\.nuget\\packages\\",
-      "outputPath": "E:\\ViRAJ\\Viraj\\Repo\\Naturub-HIS\\HISWebAPI\\WebAPI\\obj\\",
+      "projectPath": "F:\\HIS\\HISWebAPI\\WebAPI\\HISWebAPI.csproj",
+      "packagesPath": "C:\\Users\\RAMOD.KAUSHAN\\.nuget\\packages\\",
+      "outputPath": "F:\\HIS\\HISWebAPI\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\viraj.lasitha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\RAMOD.KAUSHAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

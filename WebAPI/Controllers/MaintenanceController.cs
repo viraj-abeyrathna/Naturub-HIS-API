@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,6 +29,15 @@ namespace HISWebAPI.Controllers
             objMaintenanceDA = new MaintenanceDA(_configuration);
             string JobCardNo = objMaintenanceDA.SaveJobCard(obj);
             return new JsonResult(JobCardNo);
+        }
+
+        [Route("GetJobCard/{JobCardID}")]
+        [HttpGet]
+        public JsonResult GetUps(int JobCardID)
+        {
+            objMaintenanceDA = new MaintenanceDA(_configuration);
+            DataTable dt = objMaintenanceDA.GetJobCard(JobCardID);
+            return new JsonResult(dt);
         }
     }
 }
