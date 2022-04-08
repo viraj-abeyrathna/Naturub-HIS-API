@@ -31,6 +31,15 @@ namespace HISWebAPI.Controllers
             return new JsonResult(JobCardNo);
         }
 
+        [Route("DeleteJobCard")]
+        [HttpPost]
+        public JsonResult DeleteJobCard(JobCard obj)
+        {
+            objMaintenanceDA = new MaintenanceDA(_configuration);
+            bool IsDeleted = objMaintenanceDA.DeleteJobCard(obj);
+            return new JsonResult(IsDeleted);
+        }
+
         [Route("GetJobCard/{JobCardID}")]
         [HttpGet]
         public JsonResult GetUps(int JobCardID)

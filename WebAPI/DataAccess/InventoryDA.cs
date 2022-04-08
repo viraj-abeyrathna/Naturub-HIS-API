@@ -217,6 +217,36 @@ namespace HISWebAPI.DataAccess
             return ItemCode;
         }
 
+        public string UpdateUps(Ups obj)
+        {
+            string ItemCode = "";
+            objExecute = new Execute(_configuration);
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                SqlParameter[] paramItem = new SqlParameter[]
+                {
+                        Execute.AddParameter("@ItemID",obj.ItemID),
+                        Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
+                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
+                        Execute.AddParameter("@SectionID",obj.SectionID),
+                        Execute.AddParameter("@BrandID",obj.BrandID),
+                        Execute.AddParameter("@FARBarcodeNo",obj.FARBarcodeNo),
+                        Execute.AddParameter("@CapacityID",obj.CapacityID),
+                        Execute.AddParameter("@SerialNo",obj.SerialNo),
+                        Execute.AddParameter("@Remark",obj.Remark),
+                        Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
+                };
+
+                DataRow dr = (DataRow)objExecute.Executes("UPS.spUpdateItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+
+                ItemCode = dr["ItemCode"].ToString();
+                scope.Complete();
+            }
+
+            return ItemCode;
+        }
+
         #endregion
 
 
@@ -262,6 +292,38 @@ namespace HISWebAPI.DataAccess
 
             return ItemCode;
         }
+
+        public string UpdateAccessPoint(AccessPoint obj)
+        {
+            string ItemCode = "";
+            objExecute = new Execute(_configuration);
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                SqlParameter[] paramItem = new SqlParameter[]
+                {
+                        Execute.AddParameter("@ItemID",obj.ItemID),
+                        Execute.AddParameter("@MainCategoryID",obj.MainCategoryID),
+                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
+                        Execute.AddParameter("@SectionID",obj.SectionID),
+                        Execute.AddParameter("@BrandID",obj.BrandID),
+                        Execute.AddParameter("@IPAddress",obj.IPAddress),
+                        Execute.AddParameter("@ModelName",obj.ModelName),
+                        Execute.AddParameter("@FARBarcodeNo",obj.FARBarcodeNo),
+                        Execute.AddParameter("@SerialNo",obj.SerialNo),
+                        Execute.AddParameter("@Remark",obj.Remark),
+                        Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
+                };
+
+                DataRow dr = (DataRow)objExecute.Executes("AccessPoint.spUpdateItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+
+                ItemCode = dr["ItemCode"].ToString();
+                scope.Complete();
+            }
+
+            return ItemCode;
+        }
+
         #endregion
 
         #region CCTV
@@ -298,6 +360,35 @@ namespace HISWebAPI.DataAccess
                 };
 
                 DataRow dr = (DataRow)objExecute.Executes("CCTV.spSaveItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+
+                ItemCode = dr["ItemCode"].ToString();
+                scope.Complete();
+            }
+
+            return ItemCode;
+        }
+
+        public string UpdateCctv(Cctvc obj)
+        {
+            string ItemCode = "";
+            objExecute = new Execute(_configuration);
+
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new System.TimeSpan(0, 15, 0)))
+            {
+                SqlParameter[] paramItem = new SqlParameter[]
+                {
+                        Execute.AddParameter("@ItemID",obj.ItemID),
+                        Execute.AddParameter("@SubCategoryID",obj.SubCategoryID),
+                        Execute.AddParameter("@SectionID",obj.SectionID),
+                        Execute.AddParameter("@BrandID",obj.BrandID),
+                        Execute.AddParameter("@ModelName",obj.ModelName),
+                        Execute.AddParameter("@FARBarcodeNo",obj.FARBarcodeNo),
+                        Execute.AddParameter("@SerialNo",obj.SerialNo),
+                        Execute.AddParameter("@Remark",obj.Remark),
+                        Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
+                };
+
+                DataRow dr = (DataRow)objExecute.Executes("CCTV.spUpdateItem", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
 
                 ItemCode = dr["ItemCode"].ToString();
                 scope.Complete();

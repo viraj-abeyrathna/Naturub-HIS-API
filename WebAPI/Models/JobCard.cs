@@ -17,5 +17,6 @@ namespace HISWebAPI.Models
         public string SubCategory { get; set; }
         public string Remark { get; set; }
         public string EnterdUser { get; set; }
+        public int EnterdUserID { get; set; }
     }
 }

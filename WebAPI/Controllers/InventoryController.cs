@@ -136,6 +136,15 @@ namespace HISWebAPI.Controllers
             return new JsonResult(ItemCode);
         }
 
+        [Route("UpdateUps")]
+        [HttpPost]
+        public JsonResult UpdateUps(Ups obj)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            string ItemCode = objInventoryDA.UpdateUps(obj);
+            return new JsonResult(ItemCode);
+        }
+
         #endregion
 
         #region AccessPoint
@@ -155,6 +164,15 @@ namespace HISWebAPI.Controllers
         {
             objInventoryDA = new InventoryDA(_configuration);
             string ItemCode = objInventoryDA.SaveAccessPoint(obj);
+            return new JsonResult(ItemCode);
+        }
+
+        [Route("UpdateAccessPoint")]
+        [HttpPost]
+        public JsonResult UpdateAccessPoint(AccessPoint obj)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            string ItemCode = objInventoryDA.UpdateAccessPoint(obj);
             return new JsonResult(ItemCode);
         }
 
@@ -180,6 +198,14 @@ namespace HISWebAPI.Controllers
             return new JsonResult(ItemCode);
         }
 
+        [Route("UpdateCctv")]
+        [HttpPost]
+        public JsonResult UpdateCctv(Cctvc obj)
+        {
+            objInventoryDA = new InventoryDA(_configuration);
+            string ItemCode = objInventoryDA.UpdateCctv(obj);
+            return new JsonResult(ItemCode);
+        }
 
         #endregion
 

@@ -49,6 +49,21 @@ namespace HISWebAPI.DataAccess
             return ItemCode;
         }
 
+        public bool DeleteJobCard(JobCard obj)
+        {
+            bool blSuccess = false;
+            objExecute = new Execute(_configuration);
+            SqlParameter[] paramItem = new SqlParameter[]
+              {
+                        Execute.AddParameter("@JobCardID",obj.JobCardID),
+                        Execute.AddParameter("@EnterdUserID",obj.EnterdUserID)
+              };
+
+            DataRow dr = (DataRow)objExecute.Executes("Maintenance.spDeleteJobCard", ReturnType.DataRow, paramItem, CommandType.StoredProcedure);
+            blSuccess = true;
+            return blSuccess;
+        }
+
         public DataTable GetJobCard(int jobCardID)
         {
             objExecute = new Execute(_configuration);
